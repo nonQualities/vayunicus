@@ -12,8 +12,8 @@ CMakeUserPresets.json
 compile_commands.json
 conan_cache_*.tgz
 
-cmake/
-test/
+/cmake/
+/test/
 
 build/
 bin/
