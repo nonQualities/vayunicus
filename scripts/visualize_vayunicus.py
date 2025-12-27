@@ -2,34 +2,36 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-# 1. Load the data
+# 1. Load simulation data
 df = pd.read_csv('simulation_results.csv')
 
-# 2. Reshape data into grids for the map
+# 2. Extract grid size
 width = df['x'].max() + 1
 height = df['y'].max() + 1
-pathogen_map = df['density'].values.reshape(height, width)
-wind_map = df['velocity_mag'].values.reshape(height, width)
-wall_map = df['is_wall'].values.reshape(height, width)
 
-# 3. Create the Visualization
+# 3. Convert flat table → 2D grids
+pathogen_grid = df['pathogen_concentration'].values.reshape(height, width)
+velocity_grid = df['velocity_magnitude'].values.reshape(height, width)
+wall_grid = df['is_wall'].values.reshape(height, width)
+
+# 4. Plotting
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10))
 
-# --- Plot 1: Pathogen Risk ---
-im1 = ax1.imshow(pathogen_map, cmap='YlOrRd', origin='lower')
-ax1.contour(wall_map, levels=[0.5], colors='black', linewidths=2) # Draw the walls
+# --- Pathogen Heat Map ---
+im1 = ax1.imshow(pathogen_grid, cmap='YlOrRd', origin='lower')
+ax1.contour(wall_grid, levels=[0.5], colors='black', linewidths=2)
 ax1.set_title("PATHOGEN DISPERSION (Infection Risk Map)", fontsize=14, fontweight='bold')
-ax1.set_xlabel("Distance along Alleyway (Meters)")
-ax1.set_ylabel("Width of Alleyway (Meters)")
-plt.colorbar(im1, ax=ax1, label='Concentration (Darker = Higher Risk)')
+ax1.set_xlabel("Distance Along Alleyway (Units)")
+ax1.set_ylabel("Width of Alleyway (Units)")
+plt.colorbar(im1, ax=ax1, label="Concentration")
 
-# --- Plot 2: Wind Speed ---
-im2 = ax2.imshow(wind_map, cmap='Blues', origin='lower')
-ax2.contour(wall_map, levels=[0.5], colors='black', linewidths=2)
-ax2.set_title("WIND FLOW (Ventilation Effectiveness)", fontsize=14, fontweight='bold')
-ax2.set_xlabel("Distance along Alleyway (Meters)")
-ax2.set_ylabel("Width of Alleyway (Meters)")
-plt.colorbar(im2, ax=ax2, label='Wind Speed (Lighter = Stagnant Air)')
+# --- Wind Field Map ---
+im2 = ax2.imshow(velocity_grid, cmap='Blues', origin='lower')
+ax2.contour(wall_grid, levels=[0.5], colors='black', linewidths=2)
+ax2.set_title("WIND SPEED FIELD (Ventilation Effectiveness)", fontsize=14, fontweight='bold')
+ax2.set_xlabel("Distance Along Alleyway (Units)")
+ax2.set_ylabel("Width of Alleyway (Units)")
+plt.colorbar(im2, ax=ax2, label="Wind Speed")
 
 plt.tight_layout()
 plt.show()
