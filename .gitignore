@@ -12,6 +12,9 @@ CMakeUserPresets.json
 compile_commands.json
 conan_cache_*.tgz
 
+cmake/
+test/
+
 build/
 bin/
 *.o
@@ -23,12 +26,4 @@ stats.txt
 
 .DS_Store
 Thumbs.db
-
-cmake/
-test/
-
-*.clang.format
-*.clang.tidy
-*.clangd
-*.json
 
