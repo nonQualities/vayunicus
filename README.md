@@ -1,19 +1,23 @@
-# vayunicus
+# Vayunicus: Micro-Climate Pathogen Engine 🌬️🦠
 
-This is the vayunicus project.
+[cite_start]**Vayunicus** is an open-source, high-performance simulation engine (prototype) designed to model airflow and airborne pathogen transport (TB, SARS-CoV-2) in high-density informal settlements.
 
-# Building and installing
+[cite_start]Standard CFD tools often fail in these "urban canyons" due to complex, jagged geometries that are nearly impossible to mesh[cite: 4, 15]. [cite_start]Vayunicus solves this by using the **Lattice Boltzmann Method (LBM)** and a "Bottom-Up" statistical mechanics approach.
 
-See the [BUILDING](BUILDING.md) document.
+$$f_{i}(\vec{x}+\vec{c}_{i}\Delta t,t+\Delta t)=f_{i}(\vec{x},t)-\frac{1}{\tau}[f_{i}(\vec{x},t)-f_{i}^{eq}(\vec{x},t)]$$
 
-# Contributing
+Where $\tau$ is the relaxation time linked to air viscosity3333. Pathogens are modeled as a passive scalar distribution $g_i$ that advects with the air but diffuses at its own rate
 
-See the [CONTRIBUTING](CONTRIBUTING.md) document.
+## 🛠️ Installation & Build
+[cite_start]Vayunicus uses **CMake** for a cross-platform build experience[cite: 47].
 
-# Licensing
+### Prerequisites
+* [cite_start]C++17 compatible compiler (GCC, Clang, MSVC) [cite: 47]
+* CMake 3.12+
+* Python 3.x (for visualization)
 
-<!--
-Please go to https://choosealicense.com/licenses/ and choose a license that
-fits your needs. The recommended license for a project of this type is the
-GNU AGPLv3.
--->
+### Build Instructions
+```bash
+mkdir build && cd build
+cmake ..
+make
