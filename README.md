@@ -8,14 +8,6 @@ $$f_{i}(\vec{x}+\vec{c}_{i}\Delta t,t+\Delta t)=f_{i}(\vec{x},t)-\frac{1}{\tau}[
 
 Where $\tau$ is the relaxation time linked to air viscosity3333. Pathogens are modeled as a passive scalar distribution $g_i$ that advects with the air but diffuses at its own rate
 
-## 🛠️ Installation & Build
-[cite_start]Vayunicus uses **CMake** for a cross-platform build experience[cite: 47].
-
-### Prerequisites
-* [cite_start]C++17 compatible compiler (GCC, Clang, MSVC) [cite: 47]
-* CMake 3.12+
-* Python 3.x (for visualization)
-
 ### Build Instructions
 ```bash
 mkdir build && cd build
