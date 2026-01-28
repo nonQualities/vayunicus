@@ -1,0 +1,10 @@
+width=100
+height=50
+maxSteps=5000
+viscosity=0.05
+inletVelocity=0.08
+# Physics params
+porousResistance=0.25
+buoyancyCoef=0.005
+sourceTemp=350.0
+outputName=simulation_results.csv

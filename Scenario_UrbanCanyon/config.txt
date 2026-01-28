@@ -1,0 +1,10 @@
+width=200
+height=80
+maxSteps=60000
+viscosity=0.02
+inletVelocity=0.08
+buoyancyCoef=0.001
+porousResistance=0.25
+ambientTemp=300.0
+sourceTemp=305.0
+outputName=results_canyon.csv

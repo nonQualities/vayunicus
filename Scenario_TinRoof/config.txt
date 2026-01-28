@@ -1,0 +1,10 @@
+width=200
+height=80
+maxSteps=20000
+viscosity=0.01
+inletVelocity=0.01
+buoyancyCoef=0.015
+porousResistance=0.0
+ambientTemp=300.0
+sourceTemp=350.0
+outputName=results_thermal.csv

@@ -1,0 +1,10 @@
+width=200
+height=80
+maxSteps=30000
+viscosity=0.05
+inletVelocity=0.1
+buoyancyCoef=0.0
+porousResistance=0.0
+ambientTemp=300.0
+sourceTemp=300.0
+outputName=results_validation.csv

@@ -1,22 +1,15 @@
-cmake_minimum_required(VERSION 3.12)
-project(Vayunicus)
+cmake_minimum_required(VERSION 3.10)
+project(vayunicus)
 
+# Use C++17 (Required for your project)
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Optimization is critical for LBM [cite: 46]
-if(MSVC)
-    add_compile_options(/O2 /fp:fast)
-else()
-    add_compile_options(-O3 -march=native -ffast-math)
-endif()
-
-# Define source files
-set(SOURCES
+# Create the executable by listing the 3 specific files we created
+add_executable(vayunicus
     source/main.cpp
+    source/engine/solver.cpp
+    source/io/dataLoader.cpp
 )
 
-add_executable(VayunicusEngine ${SOURCES})
-
-# Include the source directory for headers
-target_include_directories(VayunicusEngine PRIVATE source)
+# Allow us to use #include "Engine/Solver.hpp"
+target_include_directories(vayunicus PRIVATE source)
