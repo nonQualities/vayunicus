@@ -90,22 +90,18 @@ namespace Vayunicus {
                 }
                 if(rho > 0) { ux /= rho; uy /= rho; }
 
-                // --- SOPHISTICATED PHYSICS EXTENSIONS ---
 
-                // Extension A: Porous Media Resistance
+                // Porous Media Resistance
                 // If porous, apply drag force (reduce velocity)
                 if(node.type == CellType::POROUS) {
                     ux *= (1.0 - m_params.porousResistance);
                     uy *= (1.0 - m_params.porousResistance);
                 }
 
-                // Extension B: Thermal Buoyancy (Boussinesq Force)
+                // Thermal Buoyancy (Boussinesq Force)
                 // F_buoyancy = rho * beta * g * (T - T_ambient)
-                // We add this force to the vertical velocity component used in equilibrium
                 double buoyancy_force = m_params.buoyancyCoef * (node.temp - m_params.ambientTemp);
                 uy += buoyancy_force * m_tau_flow; // Apply force scaling
-
-                // ----------------------------------------
 
                 // Collision Step (BGK)
                 for(int i=0; i<Q; ++i) {
@@ -145,7 +141,7 @@ namespace Vayunicus {
     }
 
     void Solver::apply_boundary_conditions() {
-        // 1. Inlet Condition (Left Wall)
+        // 1. Inlet Condition 
         for(int y=0; y<m_params.height; ++y) {
             if(m_grid[0][y].type != CellType::SOLID) {
                  // Force equilibrium at inlet velocity
@@ -157,16 +153,13 @@ namespace Vayunicus {
             }
         }
 
-        // 2. Distributed Heat Source Logic (Tin Roof Effect)
-        // Any cell marked as POROUS (Type 2) or Source acts as a heater.
+        // 2. Distributed Heat Source Logic 
         for(int x=0; x<m_params.width; ++x) {
             for(int y=0; y<m_params.height; ++y) {
                 if(m_grid[x][y].type == CellType::POROUS) {
                     // Force the temperature to the source temperature
                     m_grid[x][y].temp = m_params.sourceTemp; 
                     
-                    // Reset the thermal distribution to match this fixed temperature
-                    // We assume zero velocity inside the "roof" material for the thermal equilibrium
                     for(int i=0; i<Q; ++i) {
                         m_grid[x][y].g[i] = calculate_temp_equilibrium(i, m_params.sourceTemp, 0.0, 0.0);
                     }

@@ -1,0 +1,10 @@
+width=300
+height=120
+maxSteps=40000
+viscosity=0.015
+inletVelocity=0.08
+buoyancyCoef=0.008
+porousResistance=0.35
+ambientTemp=300.0
+sourceTemp=345.0
+outputName=results_complex.csv
